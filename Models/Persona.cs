@@ -6,5 +6,6 @@
         public string Nombre { get; set; } = string.Empty;
         public string Apellido { get; set; }
         public int Dni { get; set; }
+        public DateTime FechaNacimiento { get; set; }
     }
 }
