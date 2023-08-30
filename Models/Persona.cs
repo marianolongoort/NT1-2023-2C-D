@@ -2,5 +2,6 @@
 {
     public class Persona
     {
+        public string Id { get; set; }
     }
 }
