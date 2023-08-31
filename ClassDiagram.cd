@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Estacionamiento_D.Models.Persona">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAEAAAAgAAAAAEAAAAAAAAAQgAAAAA=</HashCode>
+      <FileName>Models\Persona.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Telefonos" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Estacionamiento_D.Models.Cliente">
+    <Position X="5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Cliente.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Direccion" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Estacionamiento_D.Models.Direccion">
+    <Position X="2.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAgAAAAAEAADAAAAAAAQAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Models\Direccion.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Cliente" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Estacionamiento_D.Models.Empleado">
+    <Position X="7.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Empleado.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Estacionamiento_D.Models.Estancia">
+    <Position X="6.25" Y="5.75" Width="1.5" />
+    <AssociationLine Name="Cliente" Type="Estacionamiento_D.Models.Cliente" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.438" Y="5.75" />
+        <Point X="6.438" Y="4.858" />
+        <Point X="5.594" Y="4.858" />
+        <Point X="5.594" Y="4.483" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAACgAAAAAAAQACAAACAAAAIAAAAAAQAAAAAAIAAAAA=</HashCode>
+      <FileName>Models\Estancia.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Cliente" />
+      <Property Name="Vehiculo" />
+      <Property Name="Pago" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Estacionamiento_D.Models.Pago">
+    <Position X="9.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACACAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Pago.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Estancia" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Estacionamiento_D.Models.Telefono">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAASAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAABAAQ=</HashCode>
+      <FileName>Models\Telefono.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Tipo" />
+      <Property Name="Persona" />
+      <Property Name="CodArea" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Estacionamiento_D.Models.Vehiculo">
+    <Position X="2.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwgABAAA=</HashCode>
+      <FileName>Models\Vehiculo.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Estancias" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Enum Name="Estacionamiento_D.Models.CodigoDeArea" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAgAAAAAAB0A8DAIQAAAAAAAIAAAhYAIAAAAA=</HashCode>
+      <FileName>Models\CodigoArea.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Estacionamiento_D.Models.TipoTelefono" Collapsed="true">
+    <Position X="0.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAEABACAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\TipoTelefono.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
