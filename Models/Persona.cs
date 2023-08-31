@@ -1,11 +1,19 @@
-﻿namespace NT1_2023_2C_D.Models
+﻿using System.Collections.Generic;
+
+namespace Estacionamiento_D.Models
 {
     public class Persona
     {
         public int Id { get; set; }
-        public string Nombre { get; set; } = string.Empty;
+        public string Nombre { get; set; }
         public string Apellido { get; set; }
-        public int Dni { get; set; }
-        public DateTime FechaNacimiento { get; set; }
+
+        public int DNI { get; set; }
+        
+
+        public List<Telefono> Telefonos { get; set; }
+
+        public string Foto { get; set; }
+
     }
 }
