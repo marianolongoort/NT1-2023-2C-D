@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 
-namespace Estacionamiento_D.Models
+namespace NT1_2023_2C_D.Models
 {
     public class Estancia
     {

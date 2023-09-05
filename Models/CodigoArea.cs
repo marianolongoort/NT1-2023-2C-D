@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Estacionamiento_D.Models
+namespace NT1_2023_2C_D.Models
 {
     public enum CodigoDeArea
     {

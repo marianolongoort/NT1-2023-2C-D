@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Estacionamiento_D.Models
+namespace NT1_2023_2C_D.Models
 {
     public class Vehiculo
     {
