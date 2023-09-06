@@ -14,5 +14,7 @@ namespace NT1_2023_2C_D.Models
 
         public string Foto { get; set; }
 
+        public List<ClienteVehiculo> ClientesVehiculos { get; set; }
+
     }
 }

@@ -1,3 +1,5 @@
+using NT1_2023_2C_D.Models;
+
 namespace NT1_2023_2C_D
 {
     public class Program
@@ -28,9 +30,11 @@ namespace NT1_2023_2C_D
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Personas}/{action=Index}/{id?}");
 
             app.Run();
+
+
         }
     }
 }

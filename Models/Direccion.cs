@@ -10,5 +10,6 @@
         public string CodigoPostal { get; set; }
         public Cliente Cliente { get; set; }
 
+        public int ClienteId { get; set; }
     }
 }

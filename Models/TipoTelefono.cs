@@ -5,6 +5,6 @@
         Personal,
         Laboral,
         Movil,
-        Otro
+        Otro        
     }
 }

@@ -4,7 +4,10 @@
     {
         public long CUIT { get; set; }
 
-        public Direccion Direccion { get; set; }                
+        public Direccion Direccion { get; set; }
 
+        public List<Estancia> Estancias { get; set; }
+
+        public List<ClienteVehiculo> ClientesVehiculos { get; set; }
     }
 }

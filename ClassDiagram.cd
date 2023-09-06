@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="NT1_2023_2C_D.Models.Cliente">
+    <Position X="1.75" Y="5.25" Width="3.25" />
+    <AssociationLine Name="Estancias" Type="NT1_2023_2C_D.Models.Estancia" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="2.969" Y="6.483" />
+        <Point X="2.969" Y="8.583" />
+        <Point X="8" Y="8.583" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAACAAAAAAAAAEgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Cliente.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Direccion" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Estancias" />
+      <Property Name="ClientesVehiculos" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="NT1_2023_2C_D.Models.ClienteVehiculo">
+    <Position X="0.75" Y="8" Width="1.5" />
+    <AssociationLine Name="Cliente" Type="NT1_2023_2C_D.Models.Cliente" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.01" Y="8" />
+        <Point X="1.01" Y="5.812" />
+        <Point X="1.75" Y="5.812" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAABCAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ClienteVehiculo.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Cliente" />
+      <Property Name="Vehiculo" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="NT1_2023_2C_D.Models.Direccion">
+    <Position X="7.25" Y="4.75" Width="1.5" />
+    <AssociationLine Name="Cliente" Type="NT1_2023_2C_D.Models.Cliente" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.25" Y="6.458" />
+        <Point X="6.875" Y="6.458" />
+        <Point X="6.875" Y="6.188" />
+        <Point X="5" Y="6.188" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAgAAAAAEABDAAAAAAAQAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Models\Direccion.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Cliente" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="NT1_2023_2C_D.Models.Empleado">
+    <Position X="4.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Empleado.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NT1_2023_2C_D.Models.Estancia">
+    <Position X="8" Y="7.75" Width="1.5" />
+    <AssociationLine Name="Cliente" Type="NT1_2023_2C_D.Models.Cliente" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="8" Y="7.982" />
+        <Point X="3.375" Y="7.982" />
+        <Point X="3.375" Y="6.483" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAACgAAAAAAAQACAAACAAAAIAAAAAAQAAAAAAIAAAAA=</HashCode>
+      <FileName>Models\Estancia.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Cliente" />
+      <Property Name="Vehiculo" />
+      <Property Name="Pago" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="NT1_2023_2C_D.Models.Pago">
+    <Position X="11.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACACAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Pago.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Estancia" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="NT1_2023_2C_D.Models.Persona">
+    <Position X="2" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAEAAAAgAAAAAEAAAAAAAAAQgAAAAA=</HashCode>
+      <FileName>Models\Persona.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Telefonos" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="NT1_2023_2C_D.Models.Telefono">
+    <Position X="5.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAASAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEACABAAQ=</HashCode>
+      <FileName>Models\Telefono.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Persona" />
+      <Property Name="Tipo" />
+      <Property Name="CodArea" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="NT1_2023_2C_D.Models.Vehiculo">
+    <Position X="3" Y="9.25" Width="1.5" />
+    <AssociationLine Name="ClientesVehiculos" Type="NT1_2023_2C_D.Models.ClienteVehiculo" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3" Y="10.875" />
+        <Point X="1.062" Y="10.875" />
+        <Point X="1.062" Y="9.296" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAACADAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAwgABAAA=</HashCode>
+      <FileName>Models\Vehiculo.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Estancias" />
+      <Property Name="ClientesVehiculos" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Enum Name="NT1_2023_2C_D.Models.CodigoDeArea" Collapsed="true">
+    <Position X="5.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAgAAAAAAB0A8DAIQAAAAAAAIAAAhYAIAAAAA=</HashCode>
+      <FileName>Models\CodigoArea.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="NT1_2023_2C_D.Models.TipoTelefono" Collapsed="true">
+    <Position X="7.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAEABACAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\TipoTelefono.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

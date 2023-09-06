@@ -13,7 +13,7 @@ namespace NT1_2023_2C_D.Models
         public DateTime Fin { get; set; }
         public string Detalle { get; } //Construir detalle - propiedad calculada o computada
 
-        public Page Pago { get; set; }
+        public Pago Pago { get; set; }
 
     }
 }
