@@ -1,6 +1,18 @@
-﻿@{ 
-    
+﻿@model List<Persona>
+
+
+<h1>Listado de personas</h1>
+<a asp-action="Create">Crear</a>
+
+@if (Model.Any())
+{
+    <ul>
+        @foreach (Persona persona in @Model)
+        {
+            <li>@persona.NombreCompleto</li>
+        }
+    </ul>
 }
-
-
-<h1>Hola Matias</h1>
+else{
+    <h2 class="text-danger">No hay personas para listar</h2>
+}

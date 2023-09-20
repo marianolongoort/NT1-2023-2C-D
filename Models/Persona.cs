@@ -26,5 +26,11 @@ namespace NT1_2023_2C_D.Models
         [Display(Name ="Imagen")]
         public string Foto { get; set; } = "default.png";
 
+
+        public string NombreCompleto { 
+            get {
+                return $"{Apellido}, {Nombre}";
+            }
+        }
     }
 }

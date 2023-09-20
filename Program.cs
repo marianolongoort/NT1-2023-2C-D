@@ -30,7 +30,7 @@ namespace NT1_2023_2C_D
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Personas}/{action=Index}/{id?}");
+                pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
 
