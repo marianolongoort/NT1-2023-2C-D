@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace NT1_2023_2C_D.Models
 {
     public class Persona
-    {
+    {        
         public int Id { get; set; }
 
         [Required(ErrorMessage = ErrorMessages.ReqMsg )]

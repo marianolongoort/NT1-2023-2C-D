@@ -6,11 +6,19 @@ namespace NT1_2023_2C_D.Controllers
 {
     public class PersonasController : Controller
     {
+        private readonly MiBaseDeDatosContext _miBaseDeDatos;
+
+        public PersonasController(MiBaseDeDatosContext contexto)
+        {
+            this._miBaseDeDatos = contexto;
+        }
+
+
         public ActionResult Index()
         {
-
-            var personas = PersonasRepository.Personas;
-
+            //var personas = PersonasRepository.Personas;
+            var personas = _miBaseDeDatos.Personas.ToList();
+                
             return View(personas);
         }
 
@@ -29,8 +37,10 @@ namespace NT1_2023_2C_D.Controllers
             persona.Nombre = nombre;
             persona.Apellido = apellidoo;            
 
-            PersonasRepository.Personas.Add(persona);
-            
+            //PersonasRepository.Personas.Add(persona);
+            _miBaseDeDatos.Personas.Add(persona);
+            _miBaseDeDatos.SaveChanges();
+
             return RedirectToAction("Index");
         }
 

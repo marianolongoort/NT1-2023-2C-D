@@ -2,7 +2,7 @@
 
 namespace NT1_2023_2C_D.Models
 {
-    public enum CodigoDeArea
+    public enum CodigoDeAreaEnum
     {
         [Display(Name = "Ciudad Autónoma de Buenos Aires [CABA] (11)")] _11_ = 11,
         [Display(Name = "ChacoResistencia [ Chaco] (362)")] _362_ = 362,
