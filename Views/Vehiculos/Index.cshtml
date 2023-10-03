@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Persona>
+﻿@model IEnumerable<NT1_2023_2C_D.Models.Vehiculo>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,31 +13,37 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Nombre)
+                @Html.DisplayNameFor(model => model.Patente)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Apellido)
+                @Html.DisplayNameFor(model => model.Marca)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DNI)
+                @Html.DisplayNameFor(model => model.Color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AnioFabricacion)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Foto)
             </th>
-            <th>Actions</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (Persona item in Model) {
+@foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
+                @Html.DisplayFor(modelItem => item.Patente)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Apellido)
+                @Html.DisplayFor(modelItem => item.Marca)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DNI)
+                @Html.DisplayFor(modelItem => item.Color)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AnioFabricacion)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Foto)

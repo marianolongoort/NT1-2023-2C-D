@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Persona>
+﻿@model IEnumerable<NT1_2023_2C_D.Models.Estancia>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,34 +13,28 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Nombre)
+                @Html.DisplayNameFor(model => model.Monto)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Apellido)
+                @Html.DisplayNameFor(model => model.Inicio)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DNI)
+                @Html.DisplayNameFor(model => model.Fin)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Foto)
-            </th>
-            <th>Actions</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (Persona item in Model) {
+@foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
+                @Html.DisplayFor(modelItem => item.Monto)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Apellido)
+                @Html.DisplayFor(modelItem => item.Inicio)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DNI)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Foto)
+                @Html.DisplayFor(modelItem => item.Fin)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

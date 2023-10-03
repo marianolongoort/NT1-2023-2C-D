@@ -3,9 +3,9 @@ using NT1_2023_2C_D.Models;
 
 namespace NT1_2023_2C_D.Data
 {
-    public class MiBaseDeDatosContext : DbContext
+    public class GarageContext : DbContext
     {
-        public MiBaseDeDatosContext(DbContextOptions options) : base(options)
+        public GarageContext(DbContextOptions options) : base(options)
         {           
 
         }

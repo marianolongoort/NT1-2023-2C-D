@@ -10,85 +10,90 @@ using NT1_2023_2C_D.Models;
 
 namespace NT1_2023_2C_D.Controllers
 {
-    public class PersonasController : Controller
+    public class TelefonosController : Controller
     {
         private readonly GarageContext _context;
 
-        public PersonasController(GarageContext context)
+        public TelefonosController(GarageContext context)
         {
             _context = context;
         }
 
-        // GET: Personas
+        // GET: Telefonos
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Personas.ToListAsync());
+            var miBaseDeDatosContext = _context.Telefonos.Include(t => t.Persona);
+            return View(await miBaseDeDatosContext.ToListAsync());
         }
 
-        // GET: Personas/Details/5
+        // GET: Telefonos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Personas == null)
+            if (id == null || _context.Telefonos == null)
             {
                 return NotFound();
             }
 
-            var persona = await _context.Personas
+            var telefono = await _context.Telefonos
+                .Include(t => t.Persona)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (persona == null)
+            if (telefono == null)
             {
                 return NotFound();
             }
 
-            return View(persona);
+            return View(telefono);
         }
 
-        // GET: Personas/Create
+        // GET: Telefonos/Create
         public IActionResult Create()
         {
+            ViewData["PersonaId"] = new SelectList(_context.Personas, "Id", "Apellido");
             return View();
         }
 
-        // POST: Personas/Create
+        // POST: Telefonos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,Apellido,DNI,Foto")] Persona persona)
+        public async Task<IActionResult> Create([Bind("Id,CodArea,Numero,Principal,Tipo,PersonaId")] Telefono telefono)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(persona);
+                _context.Add(telefono);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(persona);
+            ViewData["PersonaId"] = new SelectList(_context.Personas, "Id", "Apellido", telefono.PersonaId);
+            return View(telefono);
         }
 
-        // GET: Personas/Edit/5
+        // GET: Telefonos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Personas == null)
+            if (id == null || _context.Telefonos == null)
             {
                 return NotFound();
             }
 
-            var persona = await _context.Personas.FindAsync(id);
-            if (persona == null)
+            var telefono = await _context.Telefonos.FindAsync(id);
+            if (telefono == null)
             {
                 return NotFound();
             }
-            return View(persona);
+            ViewData["PersonaId"] = new SelectList(_context.Personas, "Id", "Apellido", telefono.PersonaId);
+            return View(telefono);
         }
 
-        // POST: Personas/Edit/5
+        // POST: Telefonos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Apellido,DNI,Foto")] Persona persona)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CodArea,Numero,Principal,Tipo,PersonaId")] Telefono telefono)
         {
-            if (id != persona.Id)
+            if (id != telefono.Id)
             {
                 return NotFound();
             }
@@ -97,12 +102,12 @@ namespace NT1_2023_2C_D.Controllers
             {
                 try
                 {
-                    _context.Update(persona);
+                    _context.Update(telefono);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PersonaExists(persona.Id))
+                    if (!TelefonoExists(telefono.Id))
                     {
                         return NotFound();
                     }
@@ -113,49 +118,51 @@ namespace NT1_2023_2C_D.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(persona);
+            ViewData["PersonaId"] = new SelectList(_context.Personas, "Id", "Apellido", telefono.PersonaId);
+            return View(telefono);
         }
 
-        // GET: Personas/Delete/5
+        // GET: Telefonos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Personas == null)
+            if (id == null || _context.Telefonos == null)
             {
                 return NotFound();
             }
 
-            var persona = await _context.Personas
+            var telefono = await _context.Telefonos
+                .Include(t => t.Persona)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (persona == null)
+            if (telefono == null)
             {
                 return NotFound();
             }
 
-            return View(persona);
+            return View(telefono);
         }
 
-        // POST: Personas/Delete/5
+        // POST: Telefonos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Personas == null)
+            if (_context.Telefonos == null)
             {
-                return Problem("Entity set 'GarageContext.Personas'  is null.");
+                return Problem("Entity set 'GarageContext.Telefonos'  is null.");
             }
-            var persona = await _context.Personas.FindAsync(id);
-            if (persona != null)
+            var telefono = await _context.Telefonos.FindAsync(id);
+            if (telefono != null)
             {
-                _context.Personas.Remove(persona);
+                _context.Telefonos.Remove(telefono);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PersonaExists(int id)
+        private bool TelefonoExists(int id)
         {
-          return _context.Personas.Any(e => e.Id == id);
+          return _context.Telefonos.Any(e => e.Id == id);
         }
     }
 }

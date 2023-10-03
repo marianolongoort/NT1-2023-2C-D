@@ -12,9 +12,9 @@ namespace NT1_2023_2C_D.Controllers
 {
     public class ClientesController : Controller
     {
-        private readonly MiBaseDeDatosContext _context;
+        private readonly GarageContext _context;
 
-        public ClientesController(MiBaseDeDatosContext context)
+        public ClientesController(GarageContext context)
         {
             _context = context;
         }
@@ -141,7 +141,7 @@ namespace NT1_2023_2C_D.Controllers
         {
             if (_context.Clientes == null)
             {
-                return Problem("Entity set 'MiBaseDeDatosContext.Clientes'  is null.");
+                return Problem("Entity set 'GarageContext.Clientes'  is null.");
             }
             var cliente = await _context.Clientes.FindAsync(id);
             if (cliente != null)

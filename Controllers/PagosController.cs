@@ -10,85 +10,90 @@ using NT1_2023_2C_D.Models;
 
 namespace NT1_2023_2C_D.Controllers
 {
-    public class PersonasController : Controller
+    public class PagosController : Controller
     {
         private readonly GarageContext _context;
 
-        public PersonasController(GarageContext context)
+        public PagosController(GarageContext context)
         {
             _context = context;
         }
 
-        // GET: Personas
+        // GET: Pagos
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Personas.ToListAsync());
+            var miBaseDeDatosContext = _context.Pagos.Include(p => p.Estancia);
+            return View(await miBaseDeDatosContext.ToListAsync());
         }
 
-        // GET: Personas/Details/5
+        // GET: Pagos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Personas == null)
+            if (id == null || _context.Pagos == null)
             {
                 return NotFound();
             }
 
-            var persona = await _context.Personas
+            var pago = await _context.Pagos
+                .Include(p => p.Estancia)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (persona == null)
+            if (pago == null)
             {
                 return NotFound();
             }
 
-            return View(persona);
+            return View(pago);
         }
 
-        // GET: Personas/Create
+        // GET: Pagos/Create
         public IActionResult Create()
         {
+            ViewData["EstanciaId"] = new SelectList(_context.Estancias, "Id", "Id");
             return View();
         }
 
-        // POST: Personas/Create
+        // POST: Pagos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,Apellido,DNI,Foto")] Persona persona)
+        public async Task<IActionResult> Create([Bind("Id,EstanciaId,Monto")] Pago pago)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(persona);
+                _context.Add(pago);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(persona);
+            ViewData["EstanciaId"] = new SelectList(_context.Estancias, "Id", "Id", pago.EstanciaId);
+            return View(pago);
         }
 
-        // GET: Personas/Edit/5
+        // GET: Pagos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Personas == null)
+            if (id == null || _context.Pagos == null)
             {
                 return NotFound();
             }
 
-            var persona = await _context.Personas.FindAsync(id);
-            if (persona == null)
+            var pago = await _context.Pagos.FindAsync(id);
+            if (pago == null)
             {
                 return NotFound();
             }
-            return View(persona);
+            ViewData["EstanciaId"] = new SelectList(_context.Estancias, "Id", "Id", pago.EstanciaId);
+            return View(pago);
         }
 
-        // POST: Personas/Edit/5
+        // POST: Pagos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Apellido,DNI,Foto")] Persona persona)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,EstanciaId,Monto")] Pago pago)
         {
-            if (id != persona.Id)
+            if (id != pago.Id)
             {
                 return NotFound();
             }
@@ -97,12 +102,12 @@ namespace NT1_2023_2C_D.Controllers
             {
                 try
                 {
-                    _context.Update(persona);
+                    _context.Update(pago);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PersonaExists(persona.Id))
+                    if (!PagoExists(pago.Id))
                     {
                         return NotFound();
                     }
@@ -113,49 +118,51 @@ namespace NT1_2023_2C_D.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(persona);
+            ViewData["EstanciaId"] = new SelectList(_context.Estancias, "Id", "Id", pago.EstanciaId);
+            return View(pago);
         }
 
-        // GET: Personas/Delete/5
+        // GET: Pagos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Personas == null)
+            if (id == null || _context.Pagos == null)
             {
                 return NotFound();
             }
 
-            var persona = await _context.Personas
+            var pago = await _context.Pagos
+                .Include(p => p.Estancia)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (persona == null)
+            if (pago == null)
             {
                 return NotFound();
             }
 
-            return View(persona);
+            return View(pago);
         }
 
-        // POST: Personas/Delete/5
+        // POST: Pagos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Personas == null)
+            if (_context.Pagos == null)
             {
-                return Problem("Entity set 'GarageContext.Personas'  is null.");
+                return Problem("Entity set 'GarageContext.Pagos'  is null.");
             }
-            var persona = await _context.Personas.FindAsync(id);
-            if (persona != null)
+            var pago = await _context.Pagos.FindAsync(id);
+            if (pago != null)
             {
-                _context.Personas.Remove(persona);
+                _context.Pagos.Remove(pago);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PersonaExists(int id)
+        private bool PagoExists(int id)
         {
-          return _context.Personas.Any(e => e.Id == id);
+          return _context.Pagos.Any(e => e.Id == id);
         }
     }
 }

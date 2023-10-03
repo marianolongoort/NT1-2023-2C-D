@@ -11,7 +11,7 @@ namespace NT1_2023_2C_D
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddDbContext<MiBaseDeDatosContext>(options => options.UseInMemoryDatabase("MyWebAppDb"));
+            builder.Services.AddDbContext<GarageContext>(options => options.UseInMemoryDatabase("MyWebAppDb"));
 
             builder.Services.AddControllersWithViews();
 

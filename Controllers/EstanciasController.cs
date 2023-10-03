@@ -10,85 +10,85 @@ using NT1_2023_2C_D.Models;
 
 namespace NT1_2023_2C_D.Controllers
 {
-    public class PersonasController : Controller
+    public class EstanciasController : Controller
     {
         private readonly GarageContext _context;
 
-        public PersonasController(GarageContext context)
+        public EstanciasController(GarageContext context)
         {
             _context = context;
         }
 
-        // GET: Personas
+        // GET: Estancias
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Personas.ToListAsync());
+              return View(await _context.Estancias.ToListAsync());
         }
 
-        // GET: Personas/Details/5
+        // GET: Estancias/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Personas == null)
+            if (id == null || _context.Estancias == null)
             {
                 return NotFound();
             }
 
-            var persona = await _context.Personas
+            var estancia = await _context.Estancias
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (persona == null)
+            if (estancia == null)
             {
                 return NotFound();
             }
 
-            return View(persona);
+            return View(estancia);
         }
 
-        // GET: Personas/Create
+        // GET: Estancias/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Personas/Create
+        // POST: Estancias/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,Apellido,DNI,Foto")] Persona persona)
+        public async Task<IActionResult> Create([Bind("Id,Monto,Inicio,Fin")] Estancia estancia)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(persona);
+                _context.Add(estancia);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(persona);
+            return View(estancia);
         }
 
-        // GET: Personas/Edit/5
+        // GET: Estancias/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Personas == null)
+            if (id == null || _context.Estancias == null)
             {
                 return NotFound();
             }
 
-            var persona = await _context.Personas.FindAsync(id);
-            if (persona == null)
+            var estancia = await _context.Estancias.FindAsync(id);
+            if (estancia == null)
             {
                 return NotFound();
             }
-            return View(persona);
+            return View(estancia);
         }
 
-        // POST: Personas/Edit/5
+        // POST: Estancias/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Apellido,DNI,Foto")] Persona persona)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Monto,Inicio,Fin")] Estancia estancia)
         {
-            if (id != persona.Id)
+            if (id != estancia.Id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace NT1_2023_2C_D.Controllers
             {
                 try
                 {
-                    _context.Update(persona);
+                    _context.Update(estancia);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PersonaExists(persona.Id))
+                    if (!EstanciaExists(estancia.Id))
                     {
                         return NotFound();
                     }
@@ -113,49 +113,49 @@ namespace NT1_2023_2C_D.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(persona);
+            return View(estancia);
         }
 
-        // GET: Personas/Delete/5
+        // GET: Estancias/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Personas == null)
+            if (id == null || _context.Estancias == null)
             {
                 return NotFound();
             }
 
-            var persona = await _context.Personas
+            var estancia = await _context.Estancias
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (persona == null)
+            if (estancia == null)
             {
                 return NotFound();
             }
 
-            return View(persona);
+            return View(estancia);
         }
 
-        // POST: Personas/Delete/5
+        // POST: Estancias/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Personas == null)
+            if (_context.Estancias == null)
             {
-                return Problem("Entity set 'GarageContext.Personas'  is null.");
+                return Problem("Entity set 'GarageContext.Estancias'  is null.");
             }
-            var persona = await _context.Personas.FindAsync(id);
-            if (persona != null)
+            var estancia = await _context.Estancias.FindAsync(id);
+            if (estancia != null)
             {
-                _context.Personas.Remove(persona);
+                _context.Estancias.Remove(estancia);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PersonaExists(int id)
+        private bool EstanciaExists(int id)
         {
-          return _context.Personas.Any(e => e.Id == id);
+          return _context.Estancias.Any(e => e.Id == id);
         }
     }
 }
