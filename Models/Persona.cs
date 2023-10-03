@@ -18,6 +18,7 @@ namespace NT1_2023_2C_D.Models
 
 
         [Range(10000000,99999999)]
+        [Display(Name = "Documento")]
         public int DNI { get; set; }
         
         public List<Telefono> Telefonos { get; set; }

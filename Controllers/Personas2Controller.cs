@@ -12,30 +12,30 @@ namespace NT1_2023_2C_D.Controllers
 {
     public class Personas2Controller : Controller
     {
-        private readonly MiBaseDeDatosContext _context;
+        private readonly MiBaseDeDatosContext _miDb;
 
         public Personas2Controller(MiBaseDeDatosContext context)
         {
-            _context = context;
+            _miDb = context;
         }
 
-        // GET: Personas2
-        public async Task<IActionResult> Index()
+        // GET: Personas
+        public IActionResult Index()
         {
-              return View(await _context.Personas.ToListAsync());
+              return View(_miDb.Personas.ToList());
         }
 
         // GET: Personas2/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
-            if (id == null || _context.Personas == null)
+            if (id == null || _miDb.Personas == null)
             {
                 return NotFound();
             }
 
-            var persona = await _context.Personas
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (persona == null)
+            var persona = _miDb.Personas.FirstOrDefault(persona => persona.Id == id);
+
+            if(persona == null)
             {
                 return NotFound();
             }
@@ -43,23 +43,21 @@ namespace NT1_2023_2C_D.Controllers
             return View(persona);
         }
 
-        // GET: Personas2/Create
+        // GET: Personas2/Create Oferta de Formulario
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Personas2/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Personas2/Create Procesa la info.        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nombre,Apellido,DNI,Foto")] Persona persona)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(persona);
-                await _context.SaveChangesAsync();
+                _miDb.Add(persona);
+                await _miDb.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(persona);
@@ -68,12 +66,12 @@ namespace NT1_2023_2C_D.Controllers
         // GET: Personas2/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Personas == null)
+            if (id == null || _miDb.Personas == null)
             {
                 return NotFound();
             }
 
-            var persona = await _context.Personas.FindAsync(id);
+            var persona = await _miDb.Personas.FindAsync(id);
             if (persona == null)
             {
                 return NotFound();
@@ -97,8 +95,8 @@ namespace NT1_2023_2C_D.Controllers
             {
                 try
                 {
-                    _context.Update(persona);
-                    await _context.SaveChangesAsync();
+                    _miDb.Update(persona);
+                    await _miDb.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -119,12 +117,12 @@ namespace NT1_2023_2C_D.Controllers
         // GET: Personas2/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Personas == null)
+            if (id == null || _miDb.Personas == null)
             {
                 return NotFound();
             }
 
-            var persona = await _context.Personas
+            var persona = await _miDb.Personas
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (persona == null)
             {
@@ -139,23 +137,23 @@ namespace NT1_2023_2C_D.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Personas == null)
+            if (_miDb.Personas == null)
             {
                 return Problem("Entity set 'MiBaseDeDatosContext.Personas'  is null.");
             }
-            var persona = await _context.Personas.FindAsync(id);
+            var persona = await _miDb.Personas.FindAsync(id);
             if (persona != null)
             {
-                _context.Personas.Remove(persona);
+                _miDb.Personas.Remove(persona);
             }
             
-            await _context.SaveChangesAsync();
+            await _miDb.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool PersonaExists(int id)
         {
-          return _context.Personas.Any(e => e.Id == id);
+          return _miDb.Personas.Any(e => e.Id == id);
         }
     }
 }
