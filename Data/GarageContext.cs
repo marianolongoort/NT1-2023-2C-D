@@ -17,7 +17,8 @@ namespace NT1_2023_2C_D.Data
             //modelBuilder.Entity<Persona>().ToTable("Users");
 
             
-            modelBuilder.Entity<ClienteVehiculo>().HasKey( cv => new { cv.ClienteId,cv.VehiculoId } );
+            modelBuilder.Entity<ClienteVehiculo>()
+                .HasKey( cv => new { cv.ClienteId,cv.VehiculoId } );
 
 
         }

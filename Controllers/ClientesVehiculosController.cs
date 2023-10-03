@@ -49,8 +49,8 @@ namespace NT1_2023_2C_D.Controllers
         // GET: ClientesVehiculos/Create
         public IActionResult Create()
         {
-            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Apellido");
-            ViewData["VehiculoId"] = new SelectList(_context.Vehiculos, "Id", "Id");
+            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "NombreCompleto");
+            ViewData["VehiculoId"] = new SelectList(_context.Vehiculos, "Id", "Patente");
             return View();
         }
 
@@ -63,9 +63,16 @@ namespace NT1_2023_2C_D.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(clienteVehiculo);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    _context.Add(clienteVehiculo);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch
+                {
+                    ModelState.AddModelError(string.Empty, "Se presentó un error");
+                }
             }
             ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Apellido", clienteVehiculo.ClienteId);
             ViewData["VehiculoId"] = new SelectList(_context.Vehiculos, "Id", "Id", clienteVehiculo.VehiculoId);

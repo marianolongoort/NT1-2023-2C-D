@@ -17,7 +17,7 @@ namespace NT1_2023_2C_D.Models
         public string Apellido { get; set; }
 
 
-        [Range(10000000,99999999)]
+        [Range(10000000,99999999,ErrorMessage = ErrorMessages.Range)]
         [Display(Name = "Documento")]
         public int DNI { get; set; }
         

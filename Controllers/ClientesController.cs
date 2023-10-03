@@ -46,7 +46,7 @@ namespace NT1_2023_2C_D.Controllers
         // GET: Clientes/Create
         public IActionResult Create()
         {
-            return View();
+            return View(new Cliente());
         }
 
         // POST: Clientes/Create

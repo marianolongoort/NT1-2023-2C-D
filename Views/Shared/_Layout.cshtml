@@ -65,8 +65,10 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - NT1_2023_2C_D - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
+            &copy; 2023 - NT1_2023_2C_D - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> 
+                | <a asp-action="seed" asp-controller="PreCargaDb">Precarga</a>
+                | <a asp-action="DeleteDB" asp-controller="PreCargaDb">DeleteDb</a>
+        </div>        
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

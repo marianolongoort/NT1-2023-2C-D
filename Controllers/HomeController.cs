@@ -6,8 +6,10 @@ namespace NT1_2023_2C_D.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index( string mensaje)
         {
+            ViewBag.Mensaje = mensaje;
+
             return View();
         }
 

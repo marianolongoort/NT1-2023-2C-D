@@ -48,7 +48,7 @@ namespace NT1_2023_2C_D.Controllers
         // GET: Telefonos/Create
         public IActionResult Create()
         {
-            ViewData["PersonaId"] = new SelectList(_context.Personas, "Id", "Apellido");
+            ViewData["PersonaId"] = new SelectList(_context.Personas, "Id", "NombreCompleto");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace NT1_2023_2C_D.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PersonaId"] = new SelectList(_context.Personas, "Id", "Apellido", telefono.PersonaId);
+            ViewData["PersonaId"] = new SelectList(_context.Personas, "Id", "NombreCompleto", telefono.PersonaId);
             return View(telefono);
         }
 
@@ -82,7 +82,7 @@ namespace NT1_2023_2C_D.Controllers
             {
                 return NotFound();
             }
-            ViewData["PersonaId"] = new SelectList(_context.Personas, "Id", "Apellido", telefono.PersonaId);
+            ViewData["PersonaId"] = new SelectList(_context.Personas, "Id", "NombreCompleto", telefono.PersonaId);
             return View(telefono);
         }
 
@@ -118,7 +118,7 @@ namespace NT1_2023_2C_D.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PersonaId"] = new SelectList(_context.Personas, "Id", "Apellido", telefono.PersonaId);
+            ViewData["PersonaId"] = new SelectList(_context.Personas, "Id", "NombreCompleto", telefono.PersonaId);
             return View(telefono);
         }
 

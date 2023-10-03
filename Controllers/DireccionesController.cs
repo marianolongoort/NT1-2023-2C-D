@@ -48,7 +48,7 @@ namespace NT1_2023_2C_D.Controllers
         // GET: Direcciones/Create
         public IActionResult Create()
         {
-            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Apellido");
+            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "NombreCompleto");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace NT1_2023_2C_D.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Apellido", direccion.ClienteId);
+            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "NombreCompleto", direccion.ClienteId);
             return View(direccion);
         }
 
@@ -82,7 +82,7 @@ namespace NT1_2023_2C_D.Controllers
             {
                 return NotFound();
             }
-            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Apellido", direccion.ClienteId);
+            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "NombreCompleto", direccion.ClienteId);
             return View(direccion);
         }
 
@@ -118,7 +118,7 @@ namespace NT1_2023_2C_D.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Apellido", direccion.ClienteId);
+            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "NombreCompleto", direccion.ClienteId);
             return View(direccion);
         }
 
