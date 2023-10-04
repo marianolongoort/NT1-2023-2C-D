@@ -47,9 +47,21 @@ namespace NT1_2023_2C_D.Controllers
         }
 
         // GET: ClientesVehiculos/Create
-        public IActionResult Create()
+        public IActionResult Create(int? idCliente)
         {
-            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "NombreCompleto");
+            //me pasaron o no un cliente especifico?
+            if(idCliente != null && _context.Clientes.Any(clt => clt.Id == idCliente.Value))
+            {
+                //si un cliente
+                ViewBag.IdCliente = idCliente;
+            }
+            else
+            {
+                //no, necesito seleccionar un cliente
+                ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "NombreCompleto");
+            }
+
+            
             ViewData["VehiculoId"] = new SelectList(_context.Vehiculos, "Id", "Patente");
             return View();
         }
@@ -80,19 +92,19 @@ namespace NT1_2023_2C_D.Controllers
         }
 
         // GET: ClientesVehiculos/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? idCliente,int? idVehiculo)
         {
-            if (id == null || _context.ClienteVehiculos == null)
+            if (idCliente == null || idVehiculo == null || _context.ClienteVehiculos == null)
             {
                 return NotFound();
             }
 
-            var clienteVehiculo = await _context.ClienteVehiculos.FindAsync(id);
+            var clienteVehiculo = await _context.ClienteVehiculos.FindAsync(idCliente,idVehiculo);
             if (clienteVehiculo == null)
             {
                 return NotFound();
             }
-            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Apellido", clienteVehiculo.ClienteId);
+            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "NombreCompleto", clienteVehiculo.ClienteId);
             ViewData["VehiculoId"] = new SelectList(_context.Vehiculos, "Id", "Id", clienteVehiculo.VehiculoId);
             return View(clienteVehiculo);
         }

@@ -14,7 +14,14 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="ClienteId" class="control-label"></label>
-                <select asp-for="ClienteId" class ="form-control" asp-items="ViewBag.ClienteId"></select>
+                @if (ViewBag.IdCliente != null)
+                {
+                    <input asp-for="ClienteId" class="form-control" value="@ViewBag.IdCliente" readonly />   
+                }
+                else
+                {
+                    <select asp-for="ClienteId" class="form-control" asp-items="ViewBag.ClienteId"></select>
+                }                
             </div>
             <div class="form-group">
                 <label asp-for="VehiculoId" class="control-label"></label>

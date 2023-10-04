@@ -31,7 +31,7 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (Cliente item in Model) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.CUIT)
@@ -51,7 +51,8 @@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
+                <a asp-action="create" asp-controller="ClientesVehiculos" asp-route-idCliente="@item.Id" >Asociar Vehiculo</a>
             </td>
         </tr>
 }

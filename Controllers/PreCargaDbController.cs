@@ -29,6 +29,11 @@ namespace NT1_2023_2C_D.Controllers
                 AddDirecciones();
             }
 
+            if (!_context.Vehiculos.Any())
+            {
+                AddVehiculos();
+            }
+
             return RedirectToAction("Index","Home", new {mensaje = "Precarga realizada" });
         }
 
@@ -74,9 +79,15 @@ namespace NT1_2023_2C_D.Controllers
             cliente1.Apellido = "Picapiedra";
             cliente1.DNI = 55333444;
             cliente1.CUIT = 20553334440;
-            
-
             _context.Clientes.Add(cliente1);
+
+            Cliente cliente2 = new Cliente();
+            cliente2.Nombre = "Betty";
+            cliente2.Apellido = "Marmol";
+            cliente2.DNI = 55333444;
+            cliente2.CUIT = 20553334441;
+            _context.Clientes.Add(cliente2);
+
             _context.SaveChanges();
         }
 
@@ -88,6 +99,19 @@ namespace NT1_2023_2C_D.Controllers
             persona1.DNI = 22333444;
 
             _context.Personas.Add(persona1);
+            _context.SaveChanges();
+        }
+
+        private void AddVehiculos()
+        {
+            Vehiculo vehiculo1 = new Vehiculo() { 
+                AnioFabricacion = 1999,
+                Color = "Negro",
+                Foto = "default.png",
+                Marca = "Fiat",
+                Patente = "III222"};
+
+            _context.Vehiculos.Add(vehiculo1);
             _context.SaveChanges();
         }
     }

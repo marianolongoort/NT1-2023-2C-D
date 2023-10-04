@@ -62,6 +62,9 @@ namespace NT1_2023_2C_D.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+            //ModelState.AddModelError("CUIT","Es invalido");
+            //ModelState.AddModelError(string.Empty,"Otro error inesperado");
             return View(cliente);
         }
 

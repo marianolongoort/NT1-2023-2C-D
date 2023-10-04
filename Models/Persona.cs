@@ -8,13 +8,13 @@ namespace NT1_2023_2C_D.Models
     {        
         public int Id { get; set; }
 
-        [Required(ErrorMessage = ErrorMessages.ReqMsg )]
-        [StringLength(50,MinimumLength =3,ErrorMessage = ErrorMessages.StringMinMax)]
-        public string Nombre { get; set; }
+        [Required(ErrorMessage = ErrorMessages.ReqMsg)]
+        [StringLength(50, MinimumLength = 3, ErrorMessage = ErrorMessages.StringMinMax)]
+        public string Nombre { get; set; } = "ND";
 
         [Required(ErrorMessage = ErrorMessages.ReqMsg)]
         [StringLength(100, MinimumLength = 2, ErrorMessage = ErrorMessages.StringMinMax)]
-        public string Apellido { get; set; }
+        public string Apellido { get; set; } = "ND";
 
 
         [Range(10000000,99999999,ErrorMessage = ErrorMessages.Range)]
