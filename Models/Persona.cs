@@ -1,12 +1,14 @@
-﻿using NT1_2023_2C_D.Helpers;
+﻿using Microsoft.AspNetCore.Identity;
+using NT1_2023_2C_D.Helpers;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NT1_2023_2C_D.Models
 {
-    public class Persona
+    public class Persona : IdentityUser<int>
     {        
-        public int Id { get; set; }
+        //public int Id { get; set; }
 
         [Required(ErrorMessage = ErrorMessages.ReqMsg)]
         [StringLength(50, MinimumLength = 3, ErrorMessage = ErrorMessages.StringMinMax)]
@@ -27,7 +29,7 @@ namespace NT1_2023_2C_D.Models
         [Display(Name ="Imagen")]
         public string Foto { get; set; } = "default.png";
 
-
+        [NotMapped]
         public string NombreCompleto { 
             get {
                 return $"{Apellido}, {Nombre}";

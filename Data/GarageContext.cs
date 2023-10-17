@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using NT1_2023_2C_D.Models;
 
 namespace NT1_2023_2C_D.Data
 {
-    public class GarageContext : DbContext
+    public class GarageContext : IdentityDbContext<IdentityUser<int>,IdentityRole<int>,int>
     {
         public GarageContext(DbContextOptions options) : base(options)
         {           
@@ -22,6 +24,8 @@ namespace NT1_2023_2C_D.Data
 
 
         }
+
+        public DbSet<Rol> Roles { get; set; }
 
         public DbSet<Persona> Personas { get; set; }
 
