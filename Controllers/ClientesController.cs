@@ -89,23 +89,33 @@ namespace NT1_2023_2C_D.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CUIT,Id,Nombre,Apellido,DNI,Foto")] Cliente cliente)
+        public async Task<IActionResult> Edit(int id, [Bind("CUIT,Id,Nombre,Apellido,DNI,Foto")] Cliente clienteDesdeFormulario)
         {
-            if (id != cliente.Id)
+            if (id != clienteDesdeFormulario.Id)
             {
                 return NotFound();
             }
+                       
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(cliente);
+                    Cliente clienteEnDb = _context.Clientes.Find(clienteDesdeFormulario.Id);
+                    //si el cliente existe en la DB
+                    if(clienteEnDb != null)
+                    {
+                        clienteEnDb.CUIT = clienteDesdeFormulario.CUIT;
+                        clienteEnDb.Apellido = clienteDesdeFormulario.Apellido;
+                    }
+                    
+                    _context.Update(clienteEnDb);
+
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ClienteExists(cliente.Id))
+                    if (!ClienteExists(clienteDesdeFormulario.Id))
                     {
                         return NotFound();
                     }
@@ -116,7 +126,7 @@ namespace NT1_2023_2C_D.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(cliente);
+            return View(clienteDesdeFormulario);
         }
 
         // GET: Clientes/Delete/5
