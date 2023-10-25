@@ -1,17 +1,21 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NT1_2023_2C_D.Models;
 using NT1_2023_2C_D.ViewModels;
 
 namespace NT1_2023_2C_D.Controllers
 {
+ 
     public class AccountController : Controller
     {
         private readonly UserManager<Persona> _userManager;
+        private readonly SignInManager<Persona> _signInManager;
 
-        public AccountController(UserManager<Persona> userManager)
+        public AccountController(UserManager<Persona> userManager,SignInManager<Persona> signInManager)
         {
             this._userManager = userManager;
+            this._signInManager = signInManager;
         }
 
 
@@ -38,7 +42,15 @@ namespace NT1_2023_2C_D.Controllers
                 if (resultado.Succeeded)
                 {
                     //si está ok, sigo con lo que sea necesario.
-                    return RedirectToAction("Edit","Clientes",new { id = cliente.Id});
+
+                    var resultadoAddRole = await _userManager.AddToRoleAsync(cliente, "ClienteRol");
+
+                    if (resultadoAddRole.Succeeded)
+                    {
+                        return RedirectToAction("Edit", "Clientes", new { id = cliente.Id });
+                    }
+                    
+                    //procesar los errores si fuera necesario.
                 }
                 //procesar los errores.
                 foreach (var error in resultado.Errors)
@@ -52,6 +64,55 @@ namespace NT1_2023_2C_D.Controllers
         }
 
 
+        public IActionResult IniciarSesion(string returnurl)
+        {
+            TempData["ReturnUrl"] = returnurl;
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> IniciarSesion(Login modelo)
+        {
+           
+            if (ModelState.IsValid)
+            {
+                var resultadoInicioSesion = await _signInManager.PasswordSignInAsync(modelo.Email, modelo.Password, modelo.Recordarme, false);
+
+                if (resultadoInicioSesion.Succeeded)
+                {
+                    //si tengo return url redirecciono
+                    string returnurl = TempData["ReturnUrl"] as string;
+
+                    if (!string.IsNullOrEmpty(returnurl))
+                    {
+                        //tengo url para redireccionar.
+                        return Redirect(returnurl);
+                    }
+
+                    return RedirectToAction("Index", "Home");
+                }
+
+                ModelState.AddModelError(string.Empty, "Inicio de sesión inválido.");
+            }
+            return View(modelo);
+        }
+
+        public async Task<IActionResult> CerrarSesion()
+        {
+            await _signInManager.SignOutAsync();
+
+            return RedirectToAction("Index","Home");
+        }
+
+
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult AccesoDenegado()
+        {
+            return Content("No tenes permisos");
+        }
 
     }
 }

@@ -12,7 +12,7 @@ using NT1_2023_2C_D.Data;
 namespace NT1_2023_2C_D.Migrations
 {
     [DbContext(typeof(GarageContext))]
-    [Migration("20231017231857_Inicial")]
+    [Migration("20231024225646_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,7 +55,7 @@ namespace NT1_2023_2C_D.Migrations
                         .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("AspNetRoles", (string)null);
+                    b.ToTable("Roles", (string)null);
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("IdentityRole<int>");
                 });
@@ -153,7 +153,7 @@ namespace NT1_2023_2C_D.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("AspNetUsers", (string)null);
+                    b.ToTable("Personas", (string)null);
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser<int>");
                 });
@@ -215,7 +215,7 @@ namespace NT1_2023_2C_D.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles", (string)null);
+                    b.ToTable("PersonasRoles", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
@@ -261,7 +261,9 @@ namespace NT1_2023_2C_D.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Calle")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("ClienteId")
                         .HasColumnType("int");

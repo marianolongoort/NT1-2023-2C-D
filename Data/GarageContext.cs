@@ -16,16 +16,19 @@ namespace NT1_2023_2C_D.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            //modelBuilder.Entity<Persona>().ToTable("Users");
+            modelBuilder.Entity<IdentityUser<int>>().ToTable("Personas");
+            modelBuilder.Entity<IdentityRole<int>>().ToTable("Roles");
+            modelBuilder.Entity<IdentityUserRole<int>>().ToTable("PersonasRoles");
 
-            
+
             modelBuilder.Entity<ClienteVehiculo>()
                 .HasKey( cv => new { cv.ClienteId,cv.VehiculoId } );
 
 
+
         }
 
-        public DbSet<Rol> Roles { get; set; }
+        public DbSet<Rol> MisRoles { get; set; }
 
         public DbSet<Persona> Personas { get; set; }
 

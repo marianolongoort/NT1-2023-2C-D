@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NT1_2023_2C_D.Data;
 using NT1_2023_2C_D.Models;
@@ -19,7 +21,15 @@ namespace NT1_2023_2C_D
                 .AddIdentity<Persona,Rol>()
                 .AddEntityFrameworkStores<GarageContext>();
 
-            builder.Services.AddControllersWithViews();
+            builder.Services.PostConfigure<CookieAuthenticationOptions>(IdentityConstants.ApplicationScheme,
+                opciones =>
+                {
+                    opciones.LoginPath = "/Account/IniciarSesion";
+                    opciones.AccessDeniedPath = "/Account/AccesoDenegado";
+                });
+
+
+                    builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
 
@@ -36,6 +46,7 @@ namespace NT1_2023_2C_D
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(

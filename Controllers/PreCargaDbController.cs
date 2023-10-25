@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using NT1_2023_2C_D.Data;
 using NT1_2023_2C_D.Models;
 
@@ -7,14 +8,24 @@ namespace NT1_2023_2C_D.Controllers
     public class PreCargaDbController : Controller
     {
         private readonly GarageContext _context;
+        private readonly UserManager<Persona> _usermanager;
+        private readonly RoleManager<Rol> _rolemanager;
 
-        public PreCargaDbController(GarageContext context)
+        public PreCargaDbController(
+            GarageContext context,
+            UserManager<Persona> usermanager,
+            RoleManager<Rol> rolemanager)
         {
             this._context = context;
+            this._usermanager = usermanager;
+            this._rolemanager = rolemanager;
         }
 
         public IActionResult Seed()
         {
+            AddRoles().Wait();
+
+
             if (!_context.Personas.Any())
             {
                 AddPersonas();
@@ -34,8 +45,30 @@ namespace NT1_2023_2C_D.Controllers
                 AddVehiculos();
             }
 
+
+
             return RedirectToAction("Index","Home", new {mensaje = "Precarga realizada" });
         }
+
+
+        private async Task AddRoles()
+        {
+            Rol rol1 = new Rol() { 
+                Name = "EmpleadoRol"            
+            };
+            
+            Rol rol2 = new Rol()
+            {
+                Name = "ClienteRol"
+            };
+
+            var resultado1 = await _rolemanager.CreateAsync(rol1);            
+            var resultado2 = await _rolemanager.CreateAsync(rol2);
+
+
+
+        }
+
 
         private void AddDirecciones()
         {

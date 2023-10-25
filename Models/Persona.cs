@@ -22,8 +22,8 @@ namespace NT1_2023_2C_D.Models
         [Range(10000000,99999999,ErrorMessage = ErrorMessages.Range)]
         [Display(Name = "Documento")]
         public int DNI { get; set; }
-        
-        public List<Telefono> Telefonos { get; set; }
+
+        public List<Telefono> Telefonos { get; set; } 
 
         [Required(ErrorMessage = ErrorMessages.ReqMsg)]
         [Display(Name ="Imagen")]

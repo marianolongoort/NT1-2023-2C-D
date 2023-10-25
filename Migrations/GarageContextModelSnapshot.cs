@@ -53,7 +53,7 @@ namespace NT1_2023_2C_D.Migrations
                         .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("AspNetRoles", (string)null);
+                    b.ToTable("Roles", (string)null);
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("IdentityRole<int>");
                 });
@@ -151,7 +151,7 @@ namespace NT1_2023_2C_D.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("AspNetUsers", (string)null);
+                    b.ToTable("Personas", (string)null);
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser<int>");
                 });
@@ -213,7 +213,7 @@ namespace NT1_2023_2C_D.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles", (string)null);
+                    b.ToTable("PersonasRoles", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>

@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +13,7 @@ using NT1_2023_2C_D.Models;
 
 namespace NT1_2023_2C_D.Controllers
 {
+    [Authorize]
     public class ClientesController : Controller
     {
         private readonly GarageContext _context;
@@ -19,10 +23,24 @@ namespace NT1_2023_2C_D.Controllers
             _context = context;
         }
 
-        // GET: Clientes
+        // GET: Clientes        
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Clientes.ToListAsync());
+            if (User.IsInRole("ClienteRol"))
+            {
+                string username = User.Identity.Name;
+                var idUsuario = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+
+                if (!string.IsNullOrEmpty(username))
+                {
+                    //return View(_context.Clientes.Where(c => c.NormalizedUserName == username.ToUpper()).ToList());
+                    int idUsuaurioParse = Int32.Parse(idUsuario);
+
+                    return RedirectToAction("details","clientes", new {id = idUsuaurioParse } );
+                }                
+            }
+            return View(await _context.Clientes.ToListAsync());
         }
 
         // GET: Clientes/Details/5
@@ -34,16 +52,24 @@ namespace NT1_2023_2C_D.Controllers
             }
 
             var cliente = await _context.Clientes
-                .FirstOrDefaultAsync(m => m.Id == id);
+                                            .Include(c=>c.Direccion)
+                                            .Include(c=>c.Telefonos)
+                                            .FirstOrDefaultAsync(m => m.Id == id);
+
+
             if (cliente == null)
             {
                 return NotFound();
             }
+            
+            //si soy cliente, verificar si quiero acceder a los detalles de otro, tomar accion.
+
 
             return View(cliente);
         }
 
         // GET: Clientes/Create
+        [Authorize(Roles ="EmpleadoRol")]
         public IActionResult Create()
         {
             return View(new Cliente());
@@ -54,6 +80,7 @@ namespace NT1_2023_2C_D.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "EmpleadoRol")]
         public async Task<IActionResult> Create([Bind("CUIT,Id,Nombre,Apellido,DNI,Foto")] Cliente cliente)
         {
             if (ModelState.IsValid)
